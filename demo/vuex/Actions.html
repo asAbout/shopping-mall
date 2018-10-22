@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vuex - Mutations</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <cout></cout>
+    <button @click="change">change</button>
+  </div>
+  <script>
+    let cout = {
+      template:`
+        <div>
+          <p>{{count}}</p>
+          <p>{{user}}</p>
+        </div>
+      `,
+      computed: {
+        count() {
+          return this.$store.state.count
+        },
+        user() {
+          return this.$store.getters.userName
+        }
+      }
+    }
+    let store = new Vuex.Store({
+      state: {
+        count: 10,
+        name: 'jack'
+      },
+      getters: {
+        userName(state) {
+         return  state.name = 'hello'
+        }
+      },
+      mutations: {
+        changeCount (state, num) {
+          return state.count = num
+        }
+      },
+      actions: {
+        incrementAction(context, num) {
+          context.commit("changeCount", num)
+        }
+      }
+    })
+    new Vue({
+      el: '#app',
+      data: {
+
+      },
+      store,
+      components: {
+        cout
+      },
+      methods: {
+        change () {
+          return this.$store.dispatch("incrementAction", 1)
+        }
+      }
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vuex - State</title>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <cout></cout>
+  </div>
+  <script>
+    let cout = {
+      template:`
+        <div> {{count}} </div>
+      `,
+      computed: {
+        count() {
+          return this.$store.state.count
+        }
+      }
+    }
+    let store = new Vuex.Store({
+      state: {
+        count: 10
+      }
+    })
+    new Vue({
+      el: '#app',
+      data: {
+
+      },
+      store,
+      components: {
+        cout
+      }
+
+    })
+  </script>
+</body>
+</html>
